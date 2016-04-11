@@ -24,7 +24,7 @@ def read(*names, **kwargs):
 
 setup(
     name='vxghpages',
-    version='0.1.0',
+    version='0.2.0',
     license='BSD',
     description='A simple configurator helper to help you to magically configure your repository to publich the content in a doc file to gh-pages using sphinx.',
     long_description='%s\n%s' % (
