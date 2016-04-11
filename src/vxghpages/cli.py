@@ -1,3 +1,4 @@
+__version__ = "0.1.0"
 """
 Module that contains the command line app.
 
@@ -17,10 +18,23 @@ Why does this file exist, and why not put this in __main__?
 import click
 from .creator import Creator
 
+def print_version(ctx, param, value):
+    if not value or ctx.resilient_parsing:
+        return
+    click.echo('Version: %s' % __version__)
+    ctx.exit()
+
+def create_gh(ctx, param, value):
+    if not value or ctx.resilient_parsing:
+        return
+    creator = Creator()
+    creator.run()
 
 @click.command()
 @click.argument('names', nargs=-1)
+@click.option('--version', is_flag=True, callback=print_version,
+              expose_value=False, is_eager=True)
+@click.option('--create', is_flag=1, is_eager=True,
+              expose_value=False, callback=create_gh)
 def main(names):
     click.echo(repr(names))
-    creator = Creator()
-    creator.run()
